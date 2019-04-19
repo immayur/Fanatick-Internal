@@ -1,0 +1,10 @@
+# Environment variables template
+# DO NOT INCLUDE WITH SENSITIVE DATA
+
+export PORT=3000
+export DB_NAME=fanatick
+export DB_HOST=localhost
+export DB_USER=postgres
+export DB_SSL_MODE=disable
+export GO111MODULE=on
+export DB_PASSWORD=postgres

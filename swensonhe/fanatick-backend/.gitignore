@@ -1,0 +1,14 @@
+# IDE files
+.vscode
+
+# Archives
+*.zip
+
+# Binaries
+/bin
+
+runFanaticLocal.sh
+.idea
+
+# openAPI doc
+cmd/http/openapi/*
