@@ -22,6 +22,11 @@ func ErrorInternal(messages ...string) Error {
 	return Error{Code: fanatick.ErrorInternal.Error(), Message: strings.Join(messages, " ")}
 }
 
+// ErrorUnauthorized returns an unauthorized error.
+func ErrorUnauthorized(messages ...string) Error {
+	return Error{Code: fanatick.ErrorUnauthorized.Error(), Message: strings.Join(messages, " ")}
+}
+
 // Error implements the error interface.
 func (e Error) Error() string {
 	return e.Code

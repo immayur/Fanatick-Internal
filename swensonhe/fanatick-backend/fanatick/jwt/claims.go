@@ -6,6 +6,7 @@ import (
 
 // Claims are the token claims.
 type Claims struct {
-	UserID string `json:"user_id"`
+	UserID      string `json:"user_id"`
+	PhoneNumber string `json:"phone_number"`
 	jwt.StandardClaims
 }

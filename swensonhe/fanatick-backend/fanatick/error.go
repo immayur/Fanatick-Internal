@@ -7,6 +7,7 @@ type Error string
 const (
 	ErrorNotFound = Error(`not_found`)
 	ErrorInternal = Error(`internal`)
+	ErrorUnauthorized = Error(`unauthorized`)
 )
 
 // Error implements the error interface.

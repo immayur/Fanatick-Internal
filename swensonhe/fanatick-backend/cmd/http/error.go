@@ -12,6 +12,7 @@ type ErrorWriterFunc func(e error)
 var statusCodes = map[string]int{
 	string(fanatick.ErrorNotFound): http.StatusNotFound,
 	string(fanatick.ErrorInternal): http.StatusInternalServerError,
+	string(fanatick.ErrorUnauthorized): http.StatusUnauthorized,
 }
 
 // NewErrorWriter returns a new error writer.

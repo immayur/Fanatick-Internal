@@ -1,0 +1,54 @@
+{
+    "info": {
+        "contact": {},
+        "license": {}
+    },
+    "paths": {
+        "/events": {
+            "get": {
+                "description": "get events",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Show a events",
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "404": {},
+                    "500": {}
+                }
+            }
+        },
+        "/events/{id}": {
+            "get": {
+                "description": "get event by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Show a event",
+                "operationId": "int",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Event ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "404": {},
+                    "500": {}
+                }
+            }
+        }
+    }
+}

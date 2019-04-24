@@ -9,6 +9,7 @@
 
 runFanaticLocal.sh
 .idea
+runFanatickServer.sh
 
 # openAPI doc
 cmd/http/openapi/*

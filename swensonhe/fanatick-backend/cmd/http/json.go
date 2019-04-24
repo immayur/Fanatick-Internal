@@ -21,3 +21,13 @@ func NewJSONWriter(w http.ResponseWriter) JSONWriterFunc {
 func (f JSONWriterFunc) Write(v interface{}, status int) {
 	f(v, status)
 }
+
+// decodeJSON decodes *http.Request body into obj which needs to be a pointer
+func decodeJSON(r *http.Request, obj interface{}) error {
+
+	if obj == nil {
+		return nil
+	}
+
+	return json.NewDecoder(r.Body).Decode(obj)
+}

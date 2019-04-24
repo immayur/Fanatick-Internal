@@ -14,77 +14,41 @@ type Event struct {
 	DeletedAt *time.Time `json:"deleted_at"`
 }
 
-//common respone for getevent stub and getallevents
-type CommonResponseForEvent struct {
-	ID        string `json:"id"`
-	Title     string `json:"title"`
-	Venue     string `json:"venue"`
-	City      string `json:"city"`
-	StartAt   string `json:"start_at"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
-}
-
-//seat listing
-type CommonResponseForSeatListing struct {
-	SeatNumber string `json:"seat_number"`
-}
-
-// seat details
-type AssociatedEvent struct {
-	ID string `json:"id"`
-}
-type CommonResponseForSeatDetail struct {
-	ID         string          `json:"id"`
-	Event      AssociatedEvent `json:"event"`
-	SeatNumber string          `json:"number"`
-}
-
-// Maker offer
-type CommonResponseForOffer struct {
-	Amount string                       `json:"amount"`
-	Seats  CommonResponseForSeatListing `json:"seats"`
-}
-
-//commonrespone for add event
-type CommonResponseForAddEvent struct {
-	Status  string          `json:"status"`
-	Code    string          `json:"code"`
-	Message string          `json:"message"`
-	Data    AssociatedEvent `json:"data"`
-}
-
 // EventQueryParam is an event query parameter.
 type EventQueryParam string
 
 // EventGetter is the interface that wraps an event get request.
 type EventGetter interface {
-	Get(id string) (*Event, error)
+	GetEvent(id string) (*Event, error)
 }
 
 // EventQueryer is the interface that wraps an event query request.
 type EventQueryer interface {
-	Query(params map[EventQueryParam]interface{}) ([]*Event, error)
+	QueryEvent(params map[EventQueryParam]interface{}) ([]*Event, error)
 }
 
 // EventCreator is the interface that wraps an event creation request.
 type EventCreator interface {
-	Create(event *Event) error
+	CreateEvent(event *Event) error
 }
 
 // EventUpdater is the interface that wraps an event update request.
 type EventUpdater interface {
-	Update(event *Event) error
+	UpdateEvent(event *Event) error
 }
 
-// EventDeleter is the interface that wrapts an event delete request.
+// EventDeleter is the interface that wraps an event delete request.
 type EventDeleter interface {
-	Delete(id string) error
+	DeleteEvent(id string) error
 }
 
 // EventTxBeginner is the interface that wraps an event transaction starter.
 type EventTxBeginner interface {
-	BeginTx() EventTx
+	BeginEventTx() EventTx
+}
+
+type EventTxCommitter interface {
+	CommitEventTx() error
 }
 
 // EventStore defines the operations of an event store.
@@ -99,6 +63,7 @@ type EventTx interface {
 	EventCreator
 	EventUpdater
 	EventDeleter
+	EventTxCommitter
 }
 
 // The event query params.

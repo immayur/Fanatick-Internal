@@ -12,3 +12,7 @@ migration:
 # runs the migrations
 migrate:
 	migrate -path=./fanatick/postgres/migrations -database=$(DB_URL) up
+
+# runs the migrations down
+migratedown:
+	migrate -path=./fanatick/postgres/migrations -database=$(DB_URL) down 1

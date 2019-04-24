@@ -1,0 +1,37 @@
+info:
+  contact: {}
+  license: {}
+paths:
+  /events:
+    get:
+      consumes:
+      - application/json
+      description: get events
+      produces:
+      - application/json
+      responses:
+        "200": {}
+        "400": {}
+        "404": {}
+        "500": {}
+      summary: Show a events
+  /events/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get event by ID
+      operationId: int
+      parameters:
+      - description: Event ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200": {}
+        "400": {}
+        "404": {}
+        "500": {}
+      summary: Show a event

@@ -29,7 +29,8 @@ func (auth *TokenAuth) Generate(user *fanatick.User) (string, error) {
 	expireAt := time.Now().Add(auth.TokenDuration).Unix()
 
 	claims := &Claims{
-		UserID: user.ID,
+		UserID:      user.ID,
+		PhoneNumber: user.PhoneNumber,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expireAt,
 			Issuer:    issuer,

@@ -3,8 +3,16 @@
 
 export PORT=3000
 export DB_NAME=fanatick
-export DB_HOST=localhost
-export DB_USER=postgres
+export DB_HOST=fanatick-dev-db.cjhgqfokepk3.us-east-1.rds.amazonaws.com
+
 export DB_SSL_MODE=disable
 export GO111MODULE=on
-export DB_PASSWORD=postgres
+export DB_PORT=5432
+export DB_USER=postgres
+export DB_PASSWORD=fanatick123
+export CLIENT_SECRET="AIzaSyAiB53KGcGd_IAOJOb8_sQE_o5lP5Cokpw"
+export FirebaseProjectID="fanatick-dev-ec169"
+export GCLOUD_AUTH_APPLICATION_DEFAULT_TOKEN="ya29.GlvyBne0i9JYhofytAdQTp5gTvSyKRTvkcBITVfmVg6L8Qc0rJkqhFOTP9iteRFdRpnnQCF5ffz2Wz241Yb4SwEvMM8CyRg3fN2hKcxcVoPgr7bAPKLQnZk4KVfE"
+
+#SkipAllAuth will skip jwt and firebase auth
+#export SkipAllAuth=true

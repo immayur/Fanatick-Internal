@@ -22,7 +22,7 @@ type EventTx struct {
 }
 
 // Get returns an event.
-func (db *DB) Get(id string) (*fanatick.Event, error) {
+func (db *EventDB) GetEvent(id string) (*fanatick.Event, error) {
 	var event fanatick.Event
 
 	query := `
@@ -56,7 +56,7 @@ func (db *DB) Get(id string) (*fanatick.Event, error) {
 }
 
 // Query returns a list of events.
-func (db *DB) Query(params map[fanatick.EventQueryParam]interface{}) ([]*fanatick.Event, error) {
+func (db *EventDB) QueryEvent(params map[fanatick.EventQueryParam]interface{}) ([]*fanatick.Event, error) {
 	query := `
 		SELECT
 			events.id,
@@ -89,12 +89,7 @@ func (db *DB) Query(params map[fanatick.EventQueryParam]interface{}) ([]*fanatic
 		}
 	}
 
-	fmt.Println(args)
-	fmt.Println(limit)
-
 	query = fmt.Sprintf(query, strings.Join(wheres, " AND "), limit)
-
-	fmt.Println(query)
 
 	rows, err := db.DB.Query(query, args...)
 	if err != nil {
@@ -123,12 +118,26 @@ func (db *DB) Query(params map[fanatick.EventQueryParam]interface{}) ([]*fanatic
 }
 
 // BeginTx begins a transaction.
-func (db *DB) BeginTx() fanatick.EventTx {
+func (db *EventDB) BeginEventTx() fanatick.EventTx {
 	return &EventTx{Tx: db.Begin()}
 }
 
+func (tx *EventTx) CommitEventTx() error {
+
+	err := tx.Tx.Commit()
+	if err != nil {
+		err := tx.Tx.Rollback()
+		if err != nil {
+			return fmt.Errorf("falied to rollback EventTx after commit EventTx failed")
+		}
+		return fmt.Errorf("falied to commit EventTx")
+	}
+
+	return nil
+}
+
 // Create creates an event.
-func (tx *EventTx) Create(event *fanatick.Event) error {
+func (tx *EventTx) CreateEvent(event *fanatick.Event) error {
 	query := `
 		INSERT INTO events (id, name, start_at)
 		VALUES ($1, $2, $3)
@@ -146,7 +155,7 @@ func (tx *EventTx) Create(event *fanatick.Event) error {
 }
 
 // Update updates an event.
-func (tx *EventTx) Update(event *fanatick.Event) error {
+func (tx *EventTx) UpdateEvent(event *fanatick.Event) error {
 	query := `
 		UPDATE events
 		SET name=$2, start_at=$3, updated_at=$4
@@ -162,7 +171,7 @@ func (tx *EventTx) Update(event *fanatick.Event) error {
 }
 
 // Delete deletes an event.
-func (tx *EventTx) Delete(id string) error {
+func (tx *EventTx) DeleteEvent(id string) error {
 	query := `
 		UPDATE events
 		SET deleted_at=$2

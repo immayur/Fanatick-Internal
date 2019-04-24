@@ -1,10 +1,5 @@
 package fanatick
 
-
-type CommonTokenResponse struct {
-	Token string `json:"token"`
-}
-
 // TokenAuthenticator defines the operation to authenticate a token.
 type TokenAuthenticator interface {
 	Authenticate(token string) (*User, error)

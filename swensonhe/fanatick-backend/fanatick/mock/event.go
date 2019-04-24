@@ -14,7 +14,7 @@ type EventGetter struct {
 func NewEventGetter() *EventGetter {
 	return &EventGetter{
 		Fn: func(id string) (*fanatick.Event, error) {
-			return &fanatick.Event{}, nil
+			return &fanatick.Event{ID: id,}, nil
 		},
 	}
 }
